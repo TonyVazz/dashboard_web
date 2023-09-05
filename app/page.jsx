@@ -4,7 +4,7 @@ const Noto = Noto_Serif({ subsets: ['latin'], weight: "400" })
 
 function Home(){
   return (
-    <div className="bg-[#3FCC44] h-screen w-full">
+    <div className="bg-[#87F272] h-screen w-full">
       <h1 className={`text-black text-center text-3xl ${Noto.className}`}>Inicio</h1>
     </div>
   );

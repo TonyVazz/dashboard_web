@@ -7,8 +7,8 @@ export const ChartComp = ({ porcentajes }) => {
   const chartRef = useRef(null);
 
     useEffect(() => {
-      const {grasaCorp, masaOpor, masaRpor, masaMus} = porcentajes
-      console.log("Valores de porcentajes:", grasaCorp, masaOpor, masaRpor, masaMus);
+      const {bodyFat, boneMassPercentage, residualMassPercentage, muscleMass} = porcentajes;
+      //console.log("Valores de porcentajes:", bodyFat, boneMassPercentage, residualMassPercentage, muscleMass);
     
     const ctx = document.getElementById('chartComp');
 
@@ -22,7 +22,7 @@ export const ChartComp = ({ porcentajes }) => {
         labels: ['Masa grasa', 'Masas ósea', 'Masa residual', 'Masa muscular'],
         datasets: [{
           label: 'Porcentaje respecto al peso',
-          data: [grasaCorp, masaOpor, masaRpor, masaMus],
+          data: [bodyFat, boneMassPercentage, residualMassPercentage, muscleMass],
           borderWidth: 2
         }]
       },

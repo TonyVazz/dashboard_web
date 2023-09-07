@@ -11,156 +11,143 @@ const outfit = Outfit({ subsets: ['latin'], weight: "300" });
 
 
 export default (About) => {
-        const [genero, setGenero] = useState('');
-        const [peso, setPeso] = useState('');
-        const [talla, setTalla] = useState('');
-        const [edad, setEdad] = useState('');
-        const [bicipital, setBicipital] = useState('');
-        const [tricipital, setTricipital] = useState('');
-        const [subescapular, setSubescapular] = useState('');
-        const [supraileaco, setSupraileaco] = useState('');
-        const [biestiloideo, setBiestiloideo] = useState('');
-        const [femur, setFemur] = useState('');
-        const [densidad, setDensidad] = useState('');
-        const [grasaCorp, setGrasaC] = useState('');
-        const [masaOsea, setMasaO] = useState('');
-        const [masaRes, setMasaR] = useState('');
-        const [grasaCkg, setGrasaCkg] = useState('');
-        const [masaOpor, setMasaOpor] = useState('');
-        const [masaRpor, setMasaRpor] = useState('');
-        const [masaMus, setMasaMus] = useState('');
-        const [masaMusKg, setMasaMusKg] = useState('');
-    
-    const handleGenero = (e) =>{
-        setGenero(e.target.value);
-    }
-    const handlePeso = (e) =>{
-        setPeso(e.target.value);
-    }
-    const handleTalla = (e) =>{
-        setTalla(e.target.value);
-    }
-    const handleEdad = (e) =>{
-        setEdad(e.target.value);
-    }
-    const handleBicipital = (e) =>{
-        setBicipital(e.target.value);
-    }
-    const handleTricipital = (e) =>{
-        setTricipital(e.target.value);
-    }
-    const handleSubescapular = (e) =>{
-        setSubescapular(e.target.value);
-    }
-    const handleSupraileaco = (e) =>{
-        setSupraileaco(e.target.value);
-    }
-    const handleBiestiloideo = (e) =>{
-        setBiestiloideo(e.target.value);
-    }
-    const handleFemur = (e) =>{
-        setFemur(e.target.value);
-    }
+        const [formData, setFormData] = useState({
+            Gender: '',
+            weight: '',
+            height: '',
+            age: '',
+            bicipital: '',
+            tricipital: '',
+            subscapular: '',
+            suprailiac: '',
+            bicepsSkinfold: '',
+            femur: '',
+            density: '',
+            bodyFat: '',
+            boneMass: '',
+            residualMass: '',
+            bodyFatKg: '',
+            boneMassPercentage: '',
+            residualMassPercentage: '',
+            muscleMass: '',
+            muscleMassKg: '',
+          });
 
-    const calcularDensidad = () => {
-        const sumapliegues = parseFloat(bicipital)+parseFloat(tricipital)+parseFloat(subescapular)+parseFloat(supraileaco)
-
-        const densidadtemp = genero === 'Hombre' ? 1.1765 - 0.0744 * Math.log10(sumapliegues) : 1.1567 - 0.0717 * Math.log10(sumapliegues);
-        setDensidad(densidadtemp.toFixed(3));
-
-        const grasa = (495 / parseFloat(densidadtemp)) - 450;
-        setGrasaC(grasa.toFixed(2));
-
-        const grasaCorporalKg = (grasa * peso) / 100;
-        setGrasaCkg(grasaCorporalKg.toFixed(1));
-
-        const masaO = ((Math.pow((Math.pow(talla, 2) * (femur / 100) * (biestiloideo / 100) * 400), 0.712)) * 3.02);
-        setMasaO(masaO.toFixed(2));
-
-        const masaR = 0.21 * peso;
-        setMasaR(masaR);
-
-        const masaOp = (masaO * 100) / peso;
-        setMasaOpor(masaOp.toFixed(2));
-
-        const masaRp = (masaR * 100) / peso;
-        setMasaRpor(masaRp.toFixed(2));
-
-        const masaMp = 100 - (grasa + masaOp + masaRp);
-        setMasaMus(masaMp.toFixed(2));
-
-        const masaMkg = (masaMp * peso) / 100;
-        setMasaMusKg(masaMkg.toFixed(2));
-            
-    }
     const hadleSubmit = (e) => {
-    e.preventDefault();
-    
-}
+        e.preventDefault(); 
+        calculatedensity(formData)  
+    }
+
+    const handleData = (name, value) => {
+        
+        setFormData({ ...formData, [name]: value });
+      };
+
+//this is for calculate all data
+const calculatedensity = () => {
+    const {
+        bicipital: bicipital,
+        tricipital,
+        subscapular,
+        suprailiac,
+        Gender,
+        weight,
+        height,
+        femur,
+        bicepsSkinfold,
+    } = formData;
+      
+    const sumapliegues = parseFloat(bicipital) + parseFloat(tricipital) + parseFloat(subscapular) 
+    + parseFloat(suprailiac);  
+    const densitytemp = Gender === 'man' ? 1.1765 - 0.0744 * Math.log10(sumapliegues): 1.1567 - 0.0717 * Math.log10(sumapliegues);
+    const bodyFat = (495 / parseFloat(densitytemp) - 450).toFixed(2);
+    const bodyFatKg = ((bodyFat * weight) / 100).toFixed(2);
+    const boneMass =(Math.pow(Math.pow(height, 2) * (femur / 100) * (bicepsSkinfold / 100) * 400,0.712) * 3.02).toFixed(2);
+    const residualMass = Gender === 'man' ? (0.24 * weight).toFixed(2) : (0.21 * weight).toFixed(2);
+    const boneMassPercentage =  ((boneMass * 100) / weight).toFixed(2);
+    const residualMassPercentage = ((residualMass * 100) / weight).toFixed(1);
+    const muscleMass = (100 - parseFloat(bodyFat) - parseFloat(boneMassPercentage) - parseFloat(residualMassPercentage)).toFixed(2);
+    const muscleMassKg = ((muscleMass * weight) / 100).toFixed(2);
+      
+    setFormData({
+        ...formData,
+        density: densitytemp.toFixed(3),
+        bodyFat,
+        bodyFatKg,
+        boneMass,
+        residualMass,
+        boneMassPercentage,
+        residualMassPercentage,
+        muscleMass,
+        muscleMassKg,
+    });
+};//end of what we use to calculate all the data
     return (
      
-    <div className="bg-gradient-to-r from-primario to-secundario to-100% w-full">
+    <div className="bg-gradient-to-r from-primary to-secondary to-100% w-full">
         
-        <h1 className={`mt-3 text-center text-3xl ${Noto.className} text-tercero`}>Composicion corporal</h1>
-        
-        
+        <h1 className={`mt-3 text-center text-3xl ${Noto.className} text-tertiary`}>Body composition</h1>
+          
     <form onSubmit={hadleSubmit} action="">
-        
-    <div className='flex items-center justify-center mx-auto gap-16 border-2 pb-4 mt-5 rounded-2xl max-w-prose border-tercero'>
+    
+    {/*this div is for the inputs for the text that goes along with them*/}
+    <div className='flex items-center justify-center mx-auto gap-16 border-2 pb-4 mt-5 rounded-2xl max-w-prose border-tertiary'>
         <div className='text-center '> 
-        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tercero`}>Genero</h3>
-        {/*<Inputs value={genero} onChange={handleGenero}/>*/}
-        <select className='rounded-xl pl-2 pr-2 w-full pt-1 pb-1' name="genero" title='genero' value={genero} onChange={handleGenero}>
-            <option>Selecciona tu genero</option>
-            <option value="Hombre">Hombre</option>
-            <option value="Mujer">Mujer</option>
+        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tertiary`}>Gender</h3>
+        <select className='rounded-xl pl-2 pr-2 w-full pt-1 pb-1' name="Gender" title='Gender' value={formData.Gender} onChange={(e) => handleData(e.target.name, e.target.value)}>
+            <option>Choose your Gender</option>
+            <option value="man">Man</option>
+            <option value="woman">Woman</option>
         </select>
-        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tercero`}>Peso</h3>
-        <Inputs value={peso} onChange={handlePeso}/>
-        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tercero`}>Talla</h3>
-        <Inputs value={talla} onChange={handleTalla}/>
-        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tercero`}>Edad</h3>
-        <Inputs value={edad} onChange={handleEdad}/>
-        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tercero`}>Biestiloideo</h3>
-        <Inputs value={biestiloideo} onChange={handleBiestiloideo}/>
+        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tertiary`}>Weight</h3>
+        <Inputs value={formData.weight} onChange={handleData} name="weight"/>
+        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tertiary`}>Height</h3>
+        <Inputs value={formData.height} onChange={handleData} name="height"/>
+        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tertiary`}>Age</h3>
+        <Inputs value={formData.age} onChange={handleData} name="age"/>
+        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tertiary`}>Biceps Skinfold</h3>
+        <Inputs value={formData.bicepsSkinfold} onChange={handleData} name="bicepsSkinfold"/>
         </div>
 
         <div className='text-center'>
-        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tercero`}>Bicipital</h3>
-        <Inputs value={bicipital} onChange={handleBicipital}/>
-        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tercero`}>Tricipital</h3>
-        <Inputs value={tricipital} onChange={handleTricipital}/>
-        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tercero`}>Subescapular</h3>
-        <Inputs value={subescapular} onChange={handleSubescapular}/>
-        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tercero`}>Supraileaco</h3>
-        <Inputs value={supraileaco} onChange={handleSupraileaco}/>
-        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tercero `}>Femur</h3>
-        <Inputs value={femur} onChange={handleFemur}/>
+        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tertiary`}>Bicipital</h3>
+        <Inputs value={formData.bicipital} onChange={handleData} name="bicipital"/>
+        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tertiary`}>Tricipital</h3>
+        <Inputs value={formData.tricipital} onChange={handleData} name="tricipital"/>
+        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tertiary`}>Subscapular</h3>
+        <Inputs value={formData.subscapular} onChange={handleData} name="subscapular"/>
+        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tertiary`}>Suprailiac</h3>
+        <Inputs value={formData.suprailiac} onChange={handleData} name="suprailiac"/>
+        <h3 className={`mt-3 text-center text-lg ${outfit.className} text-tertiary `}>Femur</h3>
+        <Inputs value={formData.femur} onChange={handleData} name="femur"/>
         </div>
 
-    </div>
-        <div className='flex justify-center'> {/*boton*/}
-            <input className='mt-4 border-2 rounded-2xl text-tercero border-tercero p-4 font-bold hover:bg-primario' type="submit" value={'Calcular'} onClick={calcularDensidad}/>
-        </div>
+    </div> {/*finish of the div that is for the inputs for the text that goes along with them*/}
+
+        <div className='flex justify-center'> {/*button*/}
+            <input className='mt-4 border-2 rounded-2xl text-tertiary border-tertiary p-4 font-bold hover:bg-primary' type="submit" value={'calculate'} onClick={calculatedensity}/>
+        </div> {/*button*/}
         
-    <div className='flex flex-row justify-center gap-16'>{/*este div es para juntar la tabla y el cuadro de resultado */}
+    <div className='flex flex-row justify-center gap-16'>{/*this div is for joining the table and the result table */}
         
-        <div className='bg-tercero w-72 mt-5 rounded-xl  h-auto'>
-            <p>Densidad corporal: {densidad}</p>
-            <p>Grasa corporal: {grasaCorp}</p>
-            <p>Masa osea {masaOsea}</p>
-            <p>Masa residual: {masaRes}</p>
+        <div className='p-2 bg-tertiary w-72 mt-5 rounded-xl  h-auto'>
+        {console.log("Valores de porcentajes:", formData.density)}
+            <p>Body density: {formData.density}</p>
+            <p>Body Fat: {formData.bodyFat}</p>
+            <p>Bone Mass {formData.boneMass}</p>
+            <p>Residual mass: {formData.residualMass}</p>
         </div> 
-        <div className="mt-5 border-2 rounded-xl border-tercero"> {/*tabla */}
-            <Table grasaCorp={grasaCorp} grasaCkg={grasaCkg} masaOpor={masaOpor} masaOsea={masaOsea}
-                masaRpor={masaRpor} masaRes={masaRes} masaMus={masaMus} masaMusKg={masaMusKg}
+        <div className="mt-5 border-2 rounded-xl border-tertiary"> {/*table */}
+            <Table bodyFat={formData.bodyFat} bodyFatKg={formData.bodyFatKg} boneMassPercentage={formData.boneMassPercentage} boneMass={formData.boneMass}
+                residualMassPercentage={formData.residualMassPercentage} residualMass={formData.residualMass} muscleMass={formData.muscleMass} muscleMassKg={formData.muscleMassKg}
             />
-        </div> {/*tabla */}
-    </div>{/*este div es para juntar la tabla y el cuadro de resultado */}
+        </div> {/*End of the table */}
+
+    </div>{/*this div is for joining the table and the result table*/}
         
-    <div className='w-[300px] mx-auto mt-4 bg-tercero rounded-xl'>{/*grafica */}
-        <ChartComp porcentajes={{ grasaCorp, masaOpor, masaRpor, masaMus }} />
-    </div>{/*grafica */}
+    <div className='w-[300px] mx-auto mt-4 bg-tertiary rounded-xl'>{/*chart*/}
+        <ChartComp porcentajes={formData} />
+    </div>{/*End of the chart */}
         
     </form>
     </div>

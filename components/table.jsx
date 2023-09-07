@@ -1,14 +1,14 @@
 import React from 'react';
 
 function Table(props) {
-const {grasaCorp, grasaCkg, masaOpor, masaOsea, masaRpor 
-    , masaRes,masaMus, masaMusKg } = props;
+const {bodyFat, bodyFatKg, boneMassPercentage, boneMass, residualMassPercentage 
+    , residualMass, muscleMass, muscleMassKg } = props;
   return (
-    <table className="text-sm text-left text-tercero">
+    <table className="text-sm text-left text-tertiary">
       <thead className="text-xs text-gray-700 uppercase">
         <tr className='border-b'>
           <th scope="col" className="px-6">
-            Componente
+            Component
           </th>
           <th scope="col" className="px-6">
             %
@@ -19,48 +19,48 @@ const {grasaCorp, grasaCkg, masaOpor, masaOsea, masaRpor
         </tr>
       </thead>
       <tbody>
-        <tr className="bg-white border-b">
+        <tr className=" border-b">
           <th scope="row" className="px-6 font-medium">
-            Masa Grasa
+            Body Fat
           </th>
           <td className="px-6">
-            {grasaCorp}
+            {bodyFat}
           </td>
           <td className="px-6">
-            {grasaCkg}
+            {bodyFatKg}
           </td>
         </tr>
-        <tr className="bg-white border-b">
+        <tr className=" border-b">
           <th scope="row" className="px-6 font-medium">
-            Masa Osea
+            Bone Mass
           </th>
           <td className="px-6">
-            {masaOpor}
+            {boneMassPercentage}
           </td>
           <td className="px-6">
-            {masaOsea}
+            {boneMass}
           </td>
         </tr>
-        <tr className="bg-white border-b">
+        <tr className=" border-b">
           <th scope="row" className="px-6 font-medium">
-            Masa Residual
+            Residual Mass
           </th>
           <td className="px-6">
-            {masaRpor}
+            {residualMassPercentage}
           </td>
           <td className="px-6">
-            {masaRes}
+            {residualMass}
           </td>
         </tr>
-        <tr className="bg-white border-b">
+        <tr className="border-b">
           <th scope="row" className="px-6 font-medium">
-            Masa Muscular
+            Muscle Mass           
           </th>
           <td className="px-6">
-            {masaMus}
+            {muscleMass}
           </td>
           <td className="px-6">
-            {masaMusKg}
+            {muscleMassKg}
           </td>
         </tr>
       </tbody>

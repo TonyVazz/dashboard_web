@@ -1,7 +1,7 @@
 # Dashboard
 - Link: https://github.com/TonyVazz/dashboard_web
-- Author: Antonio Vazquez
-- Ultima Actualizacion: 06/09/2023
+- Autor: Antonio Vazquez
+- Ultima Actualizacion: 07/09/2023
 
 # Links
 - https://tailwindcss.com/
@@ -9,15 +9,15 @@
 - https://nodejs.org/es
 
 # Objetivo
-The objective of a body density program is to calculate the relationship between body mass and body volume, useful for assessing health and performance.
+El objetivo de un programa de densidad corporal es calcular la relación entre la masa corporal y el volumen corporal, útil para evaluar la salud y el rendimiento.
 
 
-# Background
+# Antecedentes
 ## Que es el front?
-The frontend is the part of a software system that interacts directly with the user. It is responsible for displaying the graphical interface and collecting user input, such as forms and mouse clicks, and then sending this information to the backend for processing. It is also responsible for presenting the results or responses from the backend in a way that is understandable and appealing to the user. In short, the frontend focuses on the user experience and the visual representation of the application or website.
+El frontend es la parte de un sistema informático que interactúa directamente con el usuario. Se encarga de mostrar la interfaz gráfica y recoger los datos introducidos por el usuario, como formularios y clics del ratón, y enviarlos al backend para su procesamiento. También es responsable de presentar los resultados o respuestas del backend de forma comprensible y atractiva para el usuario. En resumen, el frontend se centra en la experiencia del usuario y la representación visual de la aplicación o sitio web.
 
-# Overview
-this application combines a body density calculation function with a visual representation through graphs to help with a visual representation through graphs to help users understand and users to understand and improve their body composition effectively. 
+# Resumen
+Esta aplicación combina una función de cálculo de la densidad corporal con una representación visual mediante gráficos para ayudar con una representación visual mediante gráficos para ayudar a los usuarios a comprender y a los usuarios a comprender y mejorar su composición corporal de forma eficaz.
 
 # Requerimientos
 - primero clonamos el repositorio: **git clone**
@@ -35,6 +35,6 @@ this application combines a body density calculation function with a visual repr
 -    "tailwindcss": "3.3.3"
 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) con su navegador para ver el resultado.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Este proyecto utiliza [`next/font`]

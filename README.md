@@ -1,7 +1,6 @@
 # Dashboard
-- Link:https://github.com/TonyVazz/dashboard_web
+- Link: https://github.com/TonyVazz/dashboard_web
 - Author: Antonio Vazquez
-- Status: Draft 
 - Ultima Actualizacion: 06/09/2023
 
 # Links
@@ -20,8 +19,10 @@ The frontend is the part of a software system that interacts directly with the u
 # Overview
 this application combines a body density calculation function with a visual representation through graphs to help with a visual representation through graphs to help users understand and users to understand and improve their body composition effectively. 
 
-# Requerimientos 
-- npm run dev
+# Requerimientos
+- primero clonamos el repositorio: ** git clone **
+- instalamos las dependecias necesarias con: ** npm install **
+- corremos el programa con: ** npm run dev **
 
 -    "autoprefixer": "10.4.15",
 -   "chart.js": "^4.4.0",

@@ -20,9 +20,9 @@ The frontend is the part of a software system that interacts directly with the u
 this application combines a body density calculation function with a visual representation through graphs to help with a visual representation through graphs to help users understand and users to understand and improve their body composition effectively. 
 
 # Requerimientos
-- primero clonamos el repositorio: ** git clone **
-- instalamos las dependecias necesarias con: ** npm install **
-- corremos el programa con: ** npm run dev **
+- primero clonamos el repositorio: **git clone**
+- instalamos las dependecias necesarias con: **npm install**
+- corremos el programa con: **npm run dev**
 
 -    "autoprefixer": "10.4.15",
 -   "chart.js": "^4.4.0",
